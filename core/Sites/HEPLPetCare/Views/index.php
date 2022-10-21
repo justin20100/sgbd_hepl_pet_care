@@ -1,3 +1,6 @@
+<?php
+$site_name = 'HEPL Pet Care';
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -7,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Nomad Force HTML Bootstrap 5 Template</title>
+        <title><?= $site_name ?> HTML Bootstrap 5 Template</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +29,7 @@
         <link href="css/templatemo-nomad-force.css" rel="stylesheet">
 <!--
 
-TemplateMo 567 Nomad Force
+TemplateMo 567 <?= $site_name ?>
 
 https://templatemo.com/tm-567-nomad-force
 
@@ -40,7 +43,7 @@ https://templatemo.com/tm-567-nomad-force
             <section class="hero" id="hero">
                 <div class="heroText">
                     <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
-                        Nomad Force
+                        <?= $site_name ?>
                     </h1>
 
                     <p class="text-secondary-white-color" data-aos="fade-up" data-aos-delay="1000">
@@ -62,7 +65,7 @@ https://templatemo.com/tm-567-nomad-force
             <nav class="navbar navbar-expand-lg bg-light shadow-lg">
                 <div class="container">
                     <a class="navbar-brand" href="index.html">
-                        <strong>Nomad Force</strong>
+                        <strong><?= $site_name ?></strong>
                     </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,7 +106,7 @@ https://templatemo.com/tm-567-nomad-force
                         </div>
 
                         <div class="col-lg-6 col-12 mt-3 mb-lg-5">
-                            <p class="me-4" data-aos="fade-up" data-aos-delay="300">You may contribute <a rel="nofollow" href="http://paypal.me/templatemo" target="_blank">a small amount</a> via PayPal if <a rel="nofollow" href="https://templatemo.com/tm-567-nomad-force" target="_parent">Nomad Force Template</a> is useful for you. This will absolutely help us to keep creating better CSS templates for you. <br><br>We provide you 100% free templates on TemplateMo website. Images are provided by FreePik and Unsplash websites.</p>
+                            <p class="me-4" data-aos="fade-up" data-aos-delay="300">You may contribute <a rel="nofollow" href="http://paypal.me/templatemo" target="_blank">a small amount</a> via PayPal if <a rel="nofollow" href="https://templatemo.com/tm-567-nomad-force" target="_parent"><?= $site_name ?> Template</a> is useful for you. This will absolutely help us to keep creating better CSS templates for you. <br><br>We provide you 100% free templates on TemplateMo website. Images are provided by FreePik and Unsplash websites.</p>
                         </div>
 
                         <div class="col-lg-6 col-12 mt-lg-3 mb-lg-5">
@@ -444,7 +447,7 @@ https://templatemo.com/tm-567-nomad-force
                     </div>
 
                     <div class="col-6">
-                        <p class="copyright-text mb-0">Copyright © Nomad Force 2021 
+                        <p class="copyright-text mb-0">Copyright © <?= $site_name ?> 2021 
                         
                         <br><br>Design: <a href="https://templatemo.com/page/1" target="_parent">TemplateMo</a></p>
                     
