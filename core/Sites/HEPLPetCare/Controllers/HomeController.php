@@ -12,6 +12,8 @@ class HomeController
 {
     public function show()
     {
-        return App::getView([]);
+        return App::getView('home', [
+            'site_name' => 'HEPL Pet Care',
+        ]);
     }
 }

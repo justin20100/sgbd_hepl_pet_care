@@ -13,9 +13,9 @@ class View
     protected $variables;
     protected $file;
 
-    public function __construct($variables = [])
+    public function __construct($name, $variables = [])
     {
-        $this->name = 'baseview';
+        $this->name = $name;
         $this->layout = null;
         $this->variables = is_array($variables) ? $variables : [];
         $this->file = $this->getBaseFile();
@@ -34,12 +34,14 @@ class View
 
     protected function getBaseFile()
     {
-        $path = SITES_PATH . SITE_NAME . DS . 'Views';
+        $path = SITE_PATH . 'Views';
 
-        foreach(scandir($path) as $file){
-            if (substr($file,0,1) != '_' && substr($file, -3) == 'php'){
-                return realpath($path . DS . $file);
-            }
+        foreach(scandir($path) as $file) {
+            if (substr($file,0,1) === '_') continue;
+            if ($file !== $this->name . '.php') continue;
+            return realpath($path . DS . $file);
         }
+
+        return false;
     }
 }

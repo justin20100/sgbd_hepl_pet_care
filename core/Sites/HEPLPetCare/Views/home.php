@@ -1,6 +1,3 @@
-<?php
-$site_name = 'HEPL Pet Care';
-?>
 <!doctype html>
 <html lang="en">
     <head>

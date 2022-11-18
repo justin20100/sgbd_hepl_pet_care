@@ -36,9 +36,9 @@ class App
         return new $class();
     }
 
-    public static function getView($vars = [])
+    public static function getView($name, $vars = [])
     {
-        $view = new View($vars);
+        $view = new View($name, $vars);
         if($view->isValid()) return $view;
         return false;
     }

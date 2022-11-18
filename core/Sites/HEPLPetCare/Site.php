@@ -12,7 +12,7 @@ use SGBD\BaseSite;
 class Site extends BaseSite
 {
     protected $routes = [
-        '/' => ['name' => 'index', 'controller' => 'HomeController', 'method' => 'show'],
+        '/' => ['name' => 'home', 'controller' => 'HomeController', 'method' => 'show'],
         // Possibilité d'ajouter des variables dans les routes :
         // '/voyages/{name}' => ['name' => voyage, 'controller' => 'TripController', 'method' => 'show']
     ];
