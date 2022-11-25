@@ -30,11 +30,11 @@ class BaseModel
     {
         $args = isset($args[0]) ? $args[0] : [];
         if(strpos($name, 'get') === 0){
-            $response = self::getInstance()->loadRequest(strtolower(substr($name, 3)), $args);
+            $response = self::getInstance()->loadRequest(lcfirst(substr($name, 3)), $args);
             if($response) return $response->fetch();
         }
         elseif(strpos($name, 'list') === 0){
-            $response = self::getInstance()->loadRequest(strtolower(substr($name, 4)), $args);
+            $response = self::getInstance()->loadRequest(lcfirst(substr($name, 4)), $args);
             if($response) return $response->fetchAll();
         }
         return false;
@@ -47,10 +47,13 @@ class BaseModel
         return self::$instance;
     }
 
-    public function loadRequest($search, $replace)
+    public function loadRequest($method, $args)
     {
-        if(!($path = $this->findFile())) return null;
-        return $this->execute(str_replace($search, $replace, file_get_contents($path)));
+        $statement = call_user_func([$this, $method], $this->connexion, $args);
+        $statement->execute();
+        return $statement;
+        // if(!($path = $this->findFile())) return null;
+        // return $this->execute(str_replace($search, $replace, file_get_contents($path)));
     }
 
     public function execute($sql)
