@@ -4,6 +4,7 @@ namespace SGBD\Sites\HEPLPetCare\Controllers;
 
 use \SGBD\App;
 use \SGBD\Sites\HEPLPetCare\Models\Animal;
+use \SGBD\Sites\HEPLPetCare\Models\Employee;
 
 /**
 * Cette classe gère l'affichage de la 
@@ -17,6 +18,7 @@ class HomeController
             'site_name' => 'HEPL Pet Care',
             'rightanimals' => Animal::listHomepageRightAnimals(),
             'leftanimals' => Animal::listHomepageLeftAnimals(),
+            'employees' => Employee::listHomepageEmployee(),
         ]);
     }
 }

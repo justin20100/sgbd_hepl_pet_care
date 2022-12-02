@@ -8,7 +8,8 @@ class Animal extends BaseModel
 {
     public function homepageRightAnimals($connexion)
     {
-        return $connexion->prepare('SELECT a.`name`,
+        return $connexion->prepare('SELECT a.`name`, 
+            a.`sterilized`,
             ap.`src`,
             ap.`alt`,
             b.`name` AS `breed`,
@@ -26,6 +27,7 @@ class Animal extends BaseModel
     public function homepageLeftAnimals($connexion)
     {
         return $connexion->prepare('SELECT a.`name`,
+            a.`sterilized`,
             ap.`src`,
             ap.`alt`,
             b.`name` AS `breed`,
