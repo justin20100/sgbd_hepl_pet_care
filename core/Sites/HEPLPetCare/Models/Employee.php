@@ -6,7 +6,7 @@ use SGBD\BaseModel;
 
 class Employee extends BaseModel
 {
-    public function homepageEmployee($connexion)
+    public function homepageEmployees($connexion)
     {
         return $connexion->prepare('
             SELECT e.`order`,
