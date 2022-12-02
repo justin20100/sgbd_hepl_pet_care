@@ -34,7 +34,6 @@ https://templatemo.com/tm-567-nomad-force
     </head>
     
     <body>
-    
         <main>
 
             <section class="hero" id="hero">
@@ -44,14 +43,13 @@ https://templatemo.com/tm-567-nomad-force
                     </h1>
 
                     <p class="text-secondary-white-color" data-aos="fade-up" data-aos-delay="1000">
-                        create a great video for your <strong class="custom-underline">website</strong>
+                        Nos animaux recherchent la famille parfaite !
                     </p>
                 </div>
 
                 <div class="videoWrapper">
                     <video autoplay="" loop="" muted="" class="custom-video" poster="videos/792bd98f3e617786c850493560e11c45.jpg">
                         <source src="videos/814dc43e870597176cad645798825c03.mp4" type="video/mp4">
-
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -80,7 +78,7 @@ https://templatemo.com/tm-567-nomad-force
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#portfolio">Portfolio</a>
+                                <a class="nav-link" href="#portfolio">Nos animaux</a>
                             </li>
 
                             <li class="nav-item">
@@ -212,59 +210,41 @@ https://templatemo.com/tm-567-nomad-force
                     <div class="row">
 
                         <div class="col-12">
-                            <h2 class="mb-5 text-center" data-aos="fade-up">Portfolio</h2>
+                            <h2 class="mb-5 text-center" data-aos="fade-up">Nos animaux</h2>
                         </div>
-
                         <div class="col-lg-6 col-12">
+
+                            <?php foreach($leftanimals as $animal): ?>
+
                             <div class="portfolio-thumb mb-5" data-aos="fade-up">
-                                <a href="images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="image-popup">
-                                    <img src="images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="img-fluid portfolio-image" alt="">
+                                <a href="<?= $animal->src ?>" class="image-popup">
+                                    <img src="<?= $animal->src ?>" class="img-fluid portfolio-image" alt="">
                                 </a>
 
                                 <div class="portfolio-info">                     
-                                    <h4 class="portfolio-title mb-0">Effortless</h4>
+                                    <h4 class="portfolio-title mb-0"><?= $animal->name; ?></h4>
 
-                                    <p class="text-danger">Branding</p>
+                                    <p style="color:<?= $animal->color ?>"><?= $animal->breed ?></p>
                                 </div>
-                            </div> 
+                            </div>
 
-                            <div class="portfolio-thumb" data-aos="fade-up">
-                                <a href="images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="image-popup">
-                                    <img src="images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="img-fluid portfolio-image" alt="">
-                                </a>
-
-                                <div class="portfolio-info">                     
-                                    <h4 class="portfolio-title mb-0">Health technology</h4>
-
-                                    <p class="text-success">Art Direction</p>
-                                </div>
-                            </div> 
+                            <?php endforeach; ?>
                         </div>
 
                         <div class="col-lg-6 col-12">
+                            <?php foreach($rightanimals as $animal): ?>
                             <div class="portfolio-thumb mt-5 mt-lg-0 mb-5" data-aos="fade-up">
-                                <a href="images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="image-popup">
-                                    <img src="images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="img-fluid portfolio-image" alt="">
+                                <a href="<?= $animal->src ?>" class="image-popup">
+                                    <img src="<?= $animal->src ?>" class="img-fluid portfolio-image" alt="">
                                 </a>
 
                                 <div class="portfolio-info">                     
-                                    <h4 class="portfolio-title mb-0">Maki</h4>
+                                    <h4 class="portfolio-title mb-0"><?= $animal->name ?></h4>
 
-                                    <p class="text-warning">Website</p>
+                                    <p style="color:<?= $animal->color ?>"><?= $animal->breed ?></p>
                                 </div>
-                            </div> 
-
-                            <div class="portfolio-thumb" data-aos="fade-up">
-                                <a href="images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="image-popup">
-                                    <img src="images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="img-fluid portfolio-image" alt="">
-                                </a>
-
-                                <div class="portfolio-info">                     
-                                    <h4 class="portfolio-title mb-0">The gig economy</h4>
-
-                                    <p class="text-info">Graphic</p>
-                                </div>
-                            </div> 
+                            </div>
+                            <?php endforeach; ?>
                         </div>
 
                     </div>

@@ -6,7 +6,7 @@ use SGBD\BaseModel;
 
 class Animal extends BaseModel
 {
-    public function homepageAnimals($connexion)
+    public function homepageRightAnimals($connexion)
     {
         return $connexion->prepare('SELECT a.`name`,
             ap.`src`,
@@ -20,7 +20,24 @@ class Animal extends BaseModel
             JOIN `species` s ON b.`species_id` = s.`id`
             WHERE a.`deleted_at` IS NULL
             AND NOT EXISTS(SELECT * FROM `adoptions` ad WHERE ad.`animal_id` = a.`id`)
-            ORDER BY RAND()
-            LIMIT 4;');
+            ORDER BY a.created_at DESC
+            LIMIT 2;');
+    }
+    public function homepageLeftAnimals($connexion)
+    {
+        return $connexion->prepare('SELECT a.`name`,
+            ap.`src`,
+            ap.`alt`,
+            b.`name` AS `breed`,
+            s.`name` AS `species`,
+            s.`color`
+            FROM `animals` a
+            JOIN `animal_pictures` ap ON a.`animal_picture_id` = ap.`id`
+            JOIN `breeds` b ON a.`breed_id` = b.`id`
+            JOIN `species` s ON b.`species_id` = s.`id`
+            WHERE a.`deleted_at` IS NULL
+            AND NOT EXISTS(SELECT * FROM `adoptions` ad WHERE ad.`animal_id` = a.`id`)
+            ORDER BY a.created_at ASC
+            LIMIT 3;');
     }
 }
