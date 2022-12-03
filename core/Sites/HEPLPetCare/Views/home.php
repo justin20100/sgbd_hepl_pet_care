@@ -77,7 +77,7 @@ https://templatemo.com/tm-567-nomad-force
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">Introduction</a>
+                        <a class="nav-link" href="#about">Présentation</a>
                     </li>
 
                     <li class="nav-item">
@@ -85,11 +85,11 @@ https://templatemo.com/tm-567-nomad-force
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#news">News & Events</a>
+                        <a class="nav-link" href="#news">Articles</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact Us</a>
+                        <a class="nav-link" href="#contact">Contactez-nous</a>
                     </li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@ https://templatemo.com/tm-567-nomad-force
         <div class="container mb-5 pb-lg-5">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="mb-3" data-aos="fade-up">Sauveteur d'animaux</h2>
+                    <h2 class="mb-3" data-aos="fade-up">Présentation</h2>
                 </div>
 
                 <div class="col-lg-6 col-12 mt-3 mb-lg-5">
@@ -245,7 +245,6 @@ https://templatemo.com/tm-567-nomad-force
     <section class="news section-padding" id="news">
         <div class="container">
             <div class="row">
-
                 <div class="col-12">
                     <h2 class="mb-5 text-center" data-aos="fade-up">Articles</h2>
                 </div>
@@ -256,13 +255,17 @@ https://templatemo.com/tm-567-nomad-force
                             <img src="<?= $firstPost->src; ?>"
                                  class="img-fluid large-news-image news-image" alt="">
                         </a>
-                        <div class="news-category bg-warning text-white">News</div>
+                        <div class="news-category bg-primary text-white"><?= $firstPost->type; ?></div>
 
                         <div class="news-text-info">
                             <h5 class="news-title">
                                 <a href="news-detail.html" class="news-title-link"><?= $firstPost->title; ?></a>
                             </h5>
-                            <span class="text-muted"><?= $firstPost->published_at; ?></span>
+                            <p class="text-muted me-2">
+                                <i class="bi-geo-alt-fill me-1 mb-2 mb-lg-0"></i>
+                                <?= $firstPost->location ?>
+                            </p>
+                            <p class="text-muted"><?=  date_format( date_create($firstPost->published_at), 'd/m/Y') ?></p>
                         </div>
                     </div>
                 </div>
@@ -274,7 +277,7 @@ https://templatemo.com/tm-567-nomad-force
                                 <img src="<?= $post->src; ?>"
                                      class="img-fluid news-image" alt="">
                             </a>
-                            <div class="news-category bg-primary text-white">Events</div>
+                            <div class="news-category bg-primary text-white"><?= $post->type; ?></div>
                         </div>
 
                         <div class="news-bottom w-100">
@@ -284,12 +287,11 @@ https://templatemo.com/tm-567-nomad-force
                                 </h5>
 
                                 <div class="d-flex flex-wrap">
-                                            <span class="text-muted me-2">
+                                            <p class="text-muted me-2">
                                                 <i class="bi-geo-alt-fill me-1 mb-2 mb-lg-0"></i>
                                                 <?= $post->location ?>
-                                            </span>
-
-                                    <span class="text-muted"><?= $post->published_at ?></span>
+                                            </p>
+                                    <p class="text-muted"><?=  date_format( date_create($post->published_at), 'd/m/Y') ?></p>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +309,7 @@ https://templatemo.com/tm-567-nomad-force
 
                 <div class="col-lg-7 col-12 mx-auto">
 
-                    <h2 class="mb-4 text-center" data-aos="fade-up">Dont' be shy, write to us</h2>
+                    <h2 class="mb-4 text-center" data-aos="fade-up">Contactez-nous</h2>
 
                     <form action="#" method="post" class="contact-form" role="form" data-aos="fade-up">
 

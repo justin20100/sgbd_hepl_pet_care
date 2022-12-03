@@ -15,6 +15,7 @@ class Post extends BaseModel
             p.`slug`,
             p.`location`,
             p.`published_at`,
+            p.`type`,
             u.`firstname`,
             u.`lastname`
             FROM posts p
