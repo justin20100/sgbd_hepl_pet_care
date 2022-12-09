@@ -7,8 +7,9 @@
  *
  * ****************************************************/
 
+require_once(SITE_PATH . 'functions.php');
 require_once(SITE_PATH . 'Site.php');
 require_once(SITE_PATH . 'Models/Animal.php');
 require_once(SITE_PATH . 'Models/Employee.php');
-require_once(SITE_PATH . 'Models/post.php');
+require_once(SITE_PATH . 'Models/Post.php');
 require_once(SITE_PATH . 'Controllers/HomeController.php');

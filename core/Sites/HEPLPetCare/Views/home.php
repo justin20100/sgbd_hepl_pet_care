@@ -251,21 +251,20 @@ https://templatemo.com/tm-567-nomad-force
                 <?php $firstPost = array_shift($posts);?>
                 <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                     <div class="news-thumb" data-aos="fade-up">
-                        <a href="news-detail.html" class="news-image-hover news-image-hover-warning">
+                        <a href="/post/<?= $firstPost->slug; ?>" class="news-image-hover news-image-hover-warning">
                             <img src="<?= $firstPost->src; ?>"
                                  class="img-fluid large-news-image news-image" alt="">
                         </a>
-                        <div class="news-category bg-primary text-white"><?= $firstPost->type; ?></div>
-
+                        <div class="news-category bg-<?= hpc_get_post_type_color($firstPost->type); ?> text-white"><?= hpc_get_post_type_label($firstPost->type); ?></div>
                         <div class="news-text-info">
                             <h5 class="news-title">
-                                <a href="news-detail.html" class="news-title-link"><?= $firstPost->title; ?></a>
+                                <a href="/post/<?= $firstPost->slug; ?>" class="news-title-link"><?= $firstPost->title; ?></a>
                             </h5>
                             <p class="text-muted me-2">
                                 <i class="bi-geo-alt-fill me-1 mb-2 mb-lg-0"></i>
                                 <?= $firstPost->location ?>
                             </p>
-                            <p class="text-muted"><?=  date_format( date_create($firstPost->published_at), 'd/m/Y') ?></p>
+                            <p class="text-muted"><?=  date( 'j F Y', strtotime($firstPost->published_at)) ?></p>
                         </div>
                     </div>
                 </div>
@@ -273,17 +272,17 @@ https://templatemo.com/tm-567-nomad-force
                     <?php foreach ($posts as $index => $post): ?>
                     <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">
                         <div class="news-top w-100">
-                            <a href="news-detail.html" class="news-image-hover news-image-hover-primary">
+                            <a href="/post/<?= $post->slug ?>" class="news-image-hover news-image-hover-primary">
                                 <img src="<?= $post->src; ?>"
                                      class="img-fluid news-image" alt="">
                             </a>
-                            <div class="news-category bg-primary text-white"><?= $post->type; ?></div>
+                            <div class="news-category bg-<?= hpc_get_post_type_color($post->type); ?> text-white"><?= hpc_get_post_type_label($post->type); ?></div>
                         </div>
 
                         <div class="news-bottom w-100">
                             <div class="news-text-info">
                                 <h5 class="news-title">
-                                    <a href="news-detail.html" class="news-title-link"><?= $post->title ?></a>
+                                    <a href="/post/<?= $post->slug ?>" class="news-title-link"><?= $post->title ?></a>
                                 </h5>
 
                                 <div class="d-flex flex-wrap">
@@ -291,7 +290,7 @@ https://templatemo.com/tm-567-nomad-force
                                                 <i class="bi-geo-alt-fill me-1 mb-2 mb-lg-0"></i>
                                                 <?= $post->location ?>
                                             </p>
-                                    <p class="text-muted"><?=  date_format( date_create($post->published_at), 'd/m/Y') ?></p>
+                                    <p class="text-muted"><?=  date( 'j F Y', strtotime($post->published_at)) ?></p>
                                 </div>
                             </div>
                         </div>

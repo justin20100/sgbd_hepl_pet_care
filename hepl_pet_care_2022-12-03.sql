@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Ace SQL dump
-# Version 20035
+# Version 20042
 #
 # https://sequel-ace.com/
 # https://github.com/Sequel-Ace/Sequel-Ace
 #
 # Host: 127.0.0.1 (MySQL 5.7.39)
 # Database: hepl_pet_care
-# Generation Time: 2022-11-18 10:53:41 +0000
+# Generation Time: 2022-12-03 11:19:56 +0000
 # ************************************************************
 
 
@@ -34,6 +34,7 @@ CREATE TABLE `adoptions` (
   `adopted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `delete_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `adoptions_animals_fk` (`animal_id`),
   KEY `adoptions_clients_fk` (`client_id`),
@@ -44,10 +45,10 @@ CREATE TABLE `adoptions` (
 LOCK TABLES `adoptions` WRITE;
 /*!40000 ALTER TABLE `adoptions` DISABLE KEYS */;
 
-INSERT INTO `adoptions` (`id`, `animal_id`, `client_id`, `cost_unit`, `cost_currency`, `adopted_at`, `created_at`, `updated_at`)
+INSERT INTO `adoptions` (`id`, `animal_id`, `client_id`, `cost_unit`, `cost_currency`, `adopted_at`, `created_at`, `updated_at`, `delete_at`)
 VALUES
-	(1,1,1,20000,'euros','2022-11-19 00:00:00','2022-11-18 11:35:49','2022-11-18 11:35:49'),
-	(2,2,2,30000,'euros','2022-12-01 00:00:00','2022-11-18 11:36:55','2022-11-18 11:36:55');
+	(1,1,1,30000,'EUR',NULL,'2022-11-24 22:24:19','2022-11-24 22:24:19',NULL),
+	(2,2,2,25000,'EUR',NULL,'2022-11-24 22:25:09','2022-11-24 22:25:09',NULL);
 
 /*!40000 ALTER TABLE `adoptions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -76,8 +77,13 @@ LOCK TABLES `animal_pictures` WRITE;
 
 INSERT INTO `animal_pictures` (`id`, `animal_id`, `src`, `alt`, `order`, `created_at`, `updated_at`)
 VALUES
-	(1,1,'/images/animals/felix.jpeg','photo de Felix dans un jardin',0,'2022-11-18 11:05:41','2022-11-18 11:05:41'),
-	(2,2,'/images/animals/tchoumy.jpeg','Photo de  profile de Tchoumy',0,'2022-11-18 11:22:11','2022-11-18 11:22:11');
+	(1,1,'images/animals/dog01.jpg','Photo d\'un chien',0,'2022-11-25 11:05:59','2022-11-25 11:05:59'),
+	(2,2,'images/animals/dog02.jpg','Photo d\'un autre chien',0,'2022-11-25 11:06:16','2022-11-25 11:06:16'),
+	(3,3,'images/animals/bunny01.jpg','Photo d\'un lapin',0,'2022-11-25 11:06:43','2022-11-25 11:06:43'),
+	(4,4,'images/animals/cat01.jpg','Photo d\'un chat',0,'2022-11-25 11:06:59','2022-11-25 11:06:59'),
+	(5,5,'images/animals/hamster01.jpg','Photo d\'un autre lapin',0,'2022-11-25 11:07:33','2022-11-25 11:07:33'),
+	(7,7,'images/animals/tchoumy.jpg','photo de tchoumy',0,'2022-12-02 10:01:26','2022-12-02 10:01:26'),
+	(8,8,'images/animals/nounouche.jpg','photo de nounouche',0,'2022-12-02 10:21:24','2022-12-02 10:21:24');
 
 /*!40000 ALTER TABLE `animal_pictures` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -102,6 +108,7 @@ CREATE TABLE `animals` (
   `description` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `animals_animal_pictures_fk` (`animal_picture_id`),
   KEY `animals_breeds_fk` (`breed_id`),
@@ -112,10 +119,15 @@ CREATE TABLE `animals` (
 LOCK TABLES `animals` WRITE;
 /*!40000 ALTER TABLE `animals` DISABLE KEYS */;
 
-INSERT INTO `animals` (`id`, `animal_picture_id`, `breed_id`, `name`, `sex`, `weight`, `height`, `hair`, `sterilized`, `birthdate`, `description`, `created_at`, `updated_at`)
+INSERT INTO `animals` (`id`, `animal_picture_id`, `breed_id`, `name`, `sex`, `weight`, `height`, `hair`, `sterilized`, `birthdate`, `description`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,1,3,'Felix','male',22.00,1.10,'brun',1,'2020-01-02','Jeune chien qui a perdu son mettre. Il est tres joueur et cherche une famille pour s\'occuper de lui','2022-11-18 11:00:01','2022-11-18 11:00:01'),
-	(2,1,2,'Tchoumy','male',19.00,1.00,'noir et blanc',1,'2020-04-17','Tchoumy est un chien hyperactif toujours pret a jouer. Il obéit tres bien','2022-11-18 11:13:10','2022-11-18 11:13:10');
+	(1,1,2,'Emicha',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-11-18 11:29:03','2022-11-18 11:29:03',NULL),
+	(2,2,1,'Francis',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-11-18 11:30:14','2022-11-18 11:30:14',NULL),
+	(3,3,7,'Stan',NULL,NULL,NULL,NULL,1,NULL,NULL,'2022-11-18 11:30:50','2022-11-18 11:30:50',NULL),
+	(4,4,4,'blanc',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-11-18 11:31:25','2022-11-18 11:31:25',NULL),
+	(5,5,9,'Ange',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-11-18 11:32:14','2022-11-18 11:32:14',NULL),
+	(7,7,10,'Tchoumy',NULL,NULL,NULL,NULL,1,NULL,NULL,'2022-12-02 09:58:47','2022-12-02 09:58:47',NULL),
+	(8,8,11,'Nounouche',NULL,NULL,NULL,NULL,1,NULL,NULL,'2022-12-02 10:20:58','2022-12-02 10:20:58',NULL);
 
 /*!40000 ALTER TABLE `animals` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -142,10 +154,17 @@ LOCK TABLES `breeds` WRITE;
 
 INSERT INTO `breeds` (`id`, `species_id`, `name`, `created_at`, `updated_at`)
 VALUES
-	(1,1,'Border collie','2022-11-18 11:09:39','2022-11-18 11:09:39'),
-	(2,1,'golden retriever','2022-11-18 11:10:14','2022-11-18 11:10:14'),
-	(3,1,'shiba inu','2022-11-18 11:11:20','2022-11-18 11:11:20'),
-	(4,1,'berger australien','2022-11-18 11:11:59','2022-11-18 11:11:59');
+	(1,1,'Akita Inu','2022-11-18 11:12:15','2022-11-18 11:12:15'),
+	(2,1,'Berger Allemand','2022-11-18 11:13:13','2022-11-18 11:13:13'),
+	(3,1,'Eurasier','2022-11-18 11:14:21','2022-11-18 11:14:21'),
+	(4,2,'Bombay','2022-11-18 11:15:52','2022-11-18 11:15:52'),
+	(5,2,'Ocicat','2022-11-18 11:16:12','2022-11-18 11:16:12'),
+	(6,3,'Lapin nain','2022-11-18 11:18:38','2022-11-18 11:18:38'),
+	(7,3,'Blanc bélier','2022-11-18 11:26:09','2022-11-18 11:26:09'),
+	(8,4,'Hamster chinois','2022-11-18 11:27:46','2022-11-18 11:27:46'),
+	(9,4,'hamster doré','2022-11-18 11:27:55','2022-11-18 11:27:55'),
+	(10,1,'Border Collie','2022-12-02 10:04:35','2022-12-02 10:04:35'),
+	(11,2,'Chat de gouttiere','2022-12-02 10:28:33','2022-12-02 10:28:33');
 
 /*!40000 ALTER TABLE `breeds` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -168,6 +187,7 @@ CREATE TABLE `clients` (
   `country` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id_unique` (`user_id`),
   CONSTRAINT `clients_users_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -176,10 +196,10 @@ CREATE TABLE `clients` (
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
 
-INSERT INTO `clients` (`id`, `user_id`, `phone`, `street`, `house_number`, `house_complement`, `postal`, `city`, `country`, `created_at`, `updated_at`)
+INSERT INTO `clients` (`id`, `user_id`, `phone`, `street`, `house_number`, `house_complement`, `postal`, `city`, `country`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,1,'0456745678','rue des fleures','9',NULL,'4827','esneux','belgique','2022-11-18 11:33:20','2022-11-18 11:33:20'),
-	(2,2,'0478752409','rue des animaux','29',NULL,'2738','sprimont','belgique','2022-11-18 11:34:31','2022-11-18 11:34:31');
+	(1,1,NULL,'ananas','3',NULL,'4000','bikini','bottom','2022-11-24 21:57:23','2022-11-24 21:57:23',NULL),
+	(2,2,NULL,'piere','2',NULL,'4000','bikini','bottom','2022-11-24 21:58:26','2022-11-24 21:58:26',NULL);
 
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -199,6 +219,7 @@ CREATE TABLE `employees` (
   `order` int(10) unsigned NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id_unique` (`user_id`),
   CONSTRAINT `employees_users_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
@@ -207,11 +228,12 @@ CREATE TABLE `employees` (
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
 
-INSERT INTO `employees` (`id`, `user_id`, `src`, `color`, `job`, `order`, `created_at`, `updated_at`)
+INSERT INTO `employees` (`id`, `user_id`, `src`, `color`, `job`, `order`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,6,'/images/employees/victor.jpeg','#2F88DE','homme d\'entretien',2,'2022-11-18 11:27:38','2022-11-18 11:27:38'),
-	(2,5,'/images/employees/charlotte.jpeg','#FF41FF','secretaire',1,'2022-11-18 11:29:56','2022-11-18 11:29:56'),
-	(4,4,'/images/employees/lucia.jpeg','#FF6636','soigneuse',0,'2022-11-18 11:31:59','2022-11-18 11:31:59');
+	(1,1,'images/employees/person1.jpg','warning','Vétérinaire',1,'2022-11-18 11:39:43','2022-11-18 11:39:43',NULL),
+	(2,2,'images/employees/person2.jpg','success','Receptionniste',2,'2022-11-18 11:40:27','2022-11-18 11:40:27',NULL),
+	(3,5,'images/employees/person3.jpg','danger','Directeur',0,'2022-11-18 11:40:38','2022-11-18 11:40:38',NULL),
+	(4,4,'images/employees/person4.jpg','info','Vigile',3,'2022-11-18 11:42:04','2022-11-18 11:42:04',NULL);
 
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -258,9 +280,24 @@ CREATE TABLE `menus` (
   `title` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `menus` WRITE;
+/*!40000 ALTER TABLE `menus` DISABLE KEYS */;
+
+INSERT INTO `menus` (`id`, `location`, `title`, `created_at`, `updated_at`, `deleted_at`)
+VALUES
+	(1,'header','home','2022-11-24 22:06:35','2022-11-24 22:06:35',NULL),
+	(2,'introduction','introduction','2022-11-24 22:06:58','2022-11-24 22:06:58',NULL),
+	(3,'employees','employees','2022-11-24 22:07:12','2022-11-24 22:07:12',NULL),
+	(4,'animals','animals','2022-11-24 22:08:10','2022-11-24 22:08:10',NULL),
+	(5,'news','news','2022-11-24 22:08:55','2022-11-24 22:08:55',NULL),
+	(6,'messages','messages','2022-11-24 22:09:05','2022-11-24 22:09:05',NULL);
+
+/*!40000 ALTER TABLE `menus` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table message_message_subject
@@ -308,6 +345,7 @@ CREATE TABLE `messages` (
   `content` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -327,6 +365,7 @@ CREATE TABLE `page_sections` (
   `order` int(10) unsigned NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_unique` (`page_id`,`slug`),
   CONSTRAINT `page_sections_pages_fk` FOREIGN KEY (`id`) REFERENCES `pages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -346,11 +385,21 @@ CREATE TABLE `pages` (
   `slug` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_unique` (`slug`),
   KEY `name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+
+INSERT INTO `pages` (`id`, `name`, `title`, `slug`, `created_at`, `updated_at`, `deleted_at`)
+VALUES
+	(1,'homepage','homepage','homepage','2022-11-24 22:22:08','2022-11-24 22:22:08',NULL);
+
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table posts
@@ -372,6 +421,7 @@ CREATE TABLE `posts` (
   `published_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_unique` (`slug`),
   KEY `posts_users_fk` (`user_id`),
@@ -383,10 +433,11 @@ CREATE TABLE `posts` (
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 
-INSERT INTO `posts` (`id`, `user_id`, `species_id`, `src`, `type`, `title`, `slug`, `content`, `location`, `occurred_at`, `published_at`, `created_at`, `updated_at`)
+INSERT INTO `posts` (`id`, `user_id`, `species_id`, `src`, `type`, `title`, `slug`, `content`, `location`, `occurred_at`, `published_at`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,1,1,'/images/posts/post1.jpeg','feedback','adoption de felix','adoption-de-felix','nous avons adopté felix et il va tres bien','esneux',NULL,'2018-11-18 00:00:00','2022-11-18 11:38:49','2022-11-18 11:38:49'),
-	(3,2,1,'/images/posts/post2.jpeg','information','Beaucoup de chien abandonné','beaucoup-de-chien-abandonné','Il y a beaucoup de chien que sont bandonne a cette periode et les centres qui sont aptes a les accueillir se remplissent tres vite aussi.','Aywaille',NULL,'2022-11-17 00:00:00','2022-11-18 11:46:56','2022-11-18 11:46:56');
+	(1,1,1,'images/posts/post1.jpeg','News','Comment gary m\'a sauvé la vie','comment-gary-a-m-a-sauve-la-vie','Je me fesais attaquais par un chien assez imposant quand gary, sorti de nulle part, l\'a mordu la queue. Il s\'en est suivi un combat féroce entre les 2 chiens. Malgrès la différence de taille, Gary su s\'imposé comme le vainqueur de ce combat. Cependant il était amoché j\'ai du l\'emenait chez le véto. les chances de survis était faible mais M. Benson (mon véto) avait déjà reussi à créer des miracles. Après 13 heures et 47 min, il sort du bloc opératoire. Il marche vers moi et me dit que \"Gary est mort\". FIN ','Namur, Belgique',NULL,'2022-12-02 13:24:13','2022-11-24 22:15:02','2022-11-24 22:15:02',NULL),
+	(2,2,2,'images/posts/post2.jpeg','News','Vive les chats','vive-les-chats','J\'ai toujours adoré les chat depuis mon enfance ils sont faciles à entretenir et  donne aussi de l\'affection malgrès ce que les gens pensent. C\'est toujours mieux que les chiens qui sont bruyant, gaffeur et sales. Bref les chats sont meilleurs que les chiens #TeamChat','Anvers, Belgique',NULL,'2022-12-02 13:24:14','2022-11-24 22:18:20','2022-11-24 22:18:20',NULL),
+	(4,3,1,'images/posts/post3.jpeg','Tips','vive les hamsters','vive-les-hamsters','lalala le tete haha dzjizd kjand azdinezd ide\"berfifdenjznéz ibzedf ibdez ibzed iazn','Liege, Belgique',NULL,'2022-12-02 13:24:16','2022-12-02 13:21:14','2022-12-02 13:21:14',NULL);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -411,9 +462,10 @@ LOCK TABLES `species` WRITE;
 
 INSERT INTO `species` (`id`, `name`, `color`, `created_at`, `updated_at`)
 VALUES
-	(1,'chien','#39DE2F','2022-11-18 11:09:18','2022-11-18 11:09:18'),
-	(2,'chat','#35FAD3','2022-11-18 11:23:04','2022-11-18 11:23:04'),
-	(3,'lapin','#DECE2F','2022-11-18 11:23:27','2022-11-18 11:23:27');
+	(1,'chien','#7AF600','2022-11-18 10:59:18','2022-11-18 10:59:18'),
+	(2,'chat','#25F7C2','2022-11-18 10:59:49','2022-11-18 10:59:49'),
+	(3,'lapin','#2D4BE0','2022-11-18 11:06:04','2022-11-18 11:06:04'),
+	(4,'hamster','#ED5924','2022-11-18 11:08:35','2022-11-18 11:08:35');
 
 /*!40000 ALTER TABLE `species` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -431,20 +483,20 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `created_at`, `updated_at`)
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,'jeremy','Dubis','jeremydubois@gmail.com','2022-11-18 11:24:30','2022-11-18 11:24:30'),
-	(2,'Lucas','louons ','lucaslouons@gmail.com','2022-11-18 11:25:16','2022-11-18 11:25:16'),
-	(3,'carla','thonon','carlathonon@gmail.com','2022-11-18 11:26:00','2022-11-18 11:26:00'),
-	(4,'lucia','marlier','luciamarlier@gmail.com','2022-11-18 11:26:26','2022-11-18 11:26:26'),
-	(5,'Charlotte','dupont','charlottedupont@gmail.com','2022-11-18 11:26:53','2022-11-18 11:26:53'),
-	(6,'victor','open','victoropen@gmail.com','2022-11-18 11:27:19','2022-11-18 11:27:19');
+	(1,'Bob','Eponge','BobEponge@gmail.com','2022-11-18 11:35:19','2022-11-18 11:35:19',NULL),
+	(2,'Carlo','Calamar','CarloCalamar@gmail.com','2022-11-18 11:36:02','2022-11-18 11:36:02',NULL),
+	(3,'Patrick','Etoile','PatrickEtoile@gmail.com','2022-11-18 11:36:33','2022-11-18 11:36:33',NULL),
+	(4,'Sandy','Ecureuil','SandyEcureuil@gmail.com','2022-11-18 11:37:39','2022-11-18 11:37:39',NULL),
+	(5,'Krabs','Crabe','KrabsCrabes@gmail.com','2022-11-18 11:39:01','2022-11-18 11:39:01',NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
