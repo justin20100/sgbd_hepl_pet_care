@@ -310,14 +310,14 @@ https://templatemo.com/tm-567-nomad-force
 
                     <h2 class="mb-4 text-center" data-aos="fade-up">Contactez-nous</h2>
 
-                    <form action="#" method="post" class="contact-form" role="form" data-aos="fade-up">
+                    <form action="/contact" method="post" class="contact-form" role="form" data-aos="fade-up">
 
                         <div class="row">
 
                             <div class="col-lg-6 col-6">
-                                <label for="name" class="form-label">Name <sup class="text-danger">*</sup></label>
+                                <label for="fullname" class="form-label">Name <sup class="text-danger">*</sup></label>
 
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Full name"
+                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full name"
                                        required>
                             </div>
 
@@ -329,9 +329,9 @@ https://templatemo.com/tm-567-nomad-force
                             </div>
 
                             <div class="col-12 my-4">
-                                <label for="message" class="form-label">How can we help?</label>
+                                <label for="content" class="form-label">How can we help?</label>
 
-                                <textarea name="message" rows="6" class="form-control" id="message"
+                                <textarea name="content" rows="6" class="form-control" id="content"
                                           placeholder="Tell us about the project" required></textarea>
 
                             </div>
@@ -341,29 +341,15 @@ https://templatemo.com/tm-567-nomad-force
                                             class="text-danger">*</sup></label>
                             </div>
 
+                            <?php  foreach ($messageSubjects as $messageSubject): ?>
                             <div class="col-lg-4 col-12">
                                 <div class="form-check">
-                                    <input type="checkbox" id="checkbox1" name="checkbox1" class="form-check-input">
+                                    <input type="checkbox" id="checkbox<?= $messageSubject->id ?>" name="subjects[]" class="form-check-input" value="<?= $messageSubject->id ?>">
 
-                                    <label class="form-check-label" for="checkbox1">Branding</label>
+                                    <label class="form-check-label" for="checkbox<?= $messageSubject->id ?>"><?= $messageSubject->label ?></label>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4 col-12 my-2 my-lg-0">
-                                <div class="form-check">
-                                    <input type="checkbox" id="checkbox2" name="checkbox2" class="form-check-input">
-
-                                    <label class="form-check-label" for="checkbox2">Digital Experiences</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-12">
-                                <div class="form-check">
-                                    <input type="checkbox" id="checkbox3" name="checkbox3" class="form-check-input">
-
-                                    <label class="form-check-label" for="checkbox3">Web Development</label>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
 
                         <div class="col-lg-5 col-12 mx-auto mt-5">

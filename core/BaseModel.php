@@ -26,6 +26,11 @@ class BaseModel
         }
     }
 
+    public function getConnection()
+    {
+        return $this->connexion;
+    }
+
     public static function __callStatic($name, $args)
     {
         $args = isset($args[0]) ? $args[0] : [];

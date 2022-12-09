@@ -6,6 +6,7 @@ use \SGBD\App;
 use \SGBD\Sites\HEPLPetCare\Models\Animal;
 use \SGBD\Sites\HEPLPetCare\Models\Employee;
 use \SGBD\Sites\HEPLPetCare\Models\Post;
+use \SGBD\Sites\HEPLPetCare\Models\MessageSubject;
 
 /**
 * Cette classe gère l'affichage de la 
@@ -21,6 +22,7 @@ class HomeController
             'leftanimals' => Animal::listHomepageLeftAnimals(),
             'employees' => Employee::listHomepageEmployees(),
             'posts' => Post::listHomepagePosts(),
+            'messageSubjects' => MessageSubject::listAll(),
         ]);
     }
 }

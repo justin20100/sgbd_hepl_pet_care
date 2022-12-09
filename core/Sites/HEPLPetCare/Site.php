@@ -13,6 +13,7 @@ class Site extends BaseSite
 {
     protected $routes = [
         '/' => ['name' => 'home', 'controller' => 'HomeController', 'method' => 'show'],
+        '/contact' => ['name' => 'contact', 'controller' => 'ContactController', 'method' => 'store'],
         // Possibilité d'ajouter des variables dans les routes :
         // '/voyages/{name}' => ['name' => voyage, 'controller' => 'TripController', 'method' => 'show']
     ];
